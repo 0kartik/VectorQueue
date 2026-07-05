@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://vectorqueue.onrender.com";
 
 export async function fetchStats() {
   const res = await fetch(`${API_BASE}/stats`);
