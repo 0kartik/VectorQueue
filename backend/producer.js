@@ -1,7 +1,9 @@
 require("dotenv").config();
 const Redis = require("ioredis");
 const pool = require("./db");
-const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379", {
+  tls: process.env.REDIS_URL?.startsWith("rediss://") ? {} : undefined,
+});
 
 async function addJob(jobData, priority = "low") {
   // 1. Insert into Postgres first — this is the source of truth

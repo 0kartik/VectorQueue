@@ -1,6 +1,7 @@
 const Redis = require("ioredis");
-const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
-
+const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379", {
+  tls: process.env.REDIS_URL?.startsWith("rediss://") ? {} : undefined,
+});
 async function checkDelayedJobs() {
   const now = Date.now();
   const readyJobs = await redis.zrangebyscore("delayed_jobs", 0, now);

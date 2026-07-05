@@ -1,8 +1,9 @@
 require("dotenv").config();
 const Redis = require("ioredis");
 const pool = require("./db");
-const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
-
+const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379", {
+  tls: process.env.REDIS_URL?.startsWith("rediss://") ? {} : undefined,
+});
 const WORKER_ID = process.argv[2] || "worker-1";
 const MAX_RETRIES = 3;
 const CONCURRENCY_LIMITS = { resize_image: 2 };

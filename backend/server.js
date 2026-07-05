@@ -7,8 +7,9 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
-const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
-
+const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379", {
+  tls: process.env.REDIS_URL?.startsWith("rediss://") ? {} : undefined,
+});
 // POST /jobs — create a new job
 app.post("/jobs", async (req, res) => {
   try {
