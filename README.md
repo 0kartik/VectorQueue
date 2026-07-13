@@ -83,7 +83,7 @@ Postgres is the source of truth for job state and full history. Redis is the fas
 
 ---
 
-## A real bug I hit (and why it's a good story)
+## A real bug I hit
 
 Early on, retried jobs would vanish into a queue that was never checked. Priority lanes (`jobs:high` / `jobs:low`) had replaced a single `jobs` list — but the scheduler's requeue logic still pushed retried jobs back into the old, now-dead `jobs` key. Workers only ever polled the priority lanes, so retried jobs sat invisible in Redis, and the priority itself wasn't even being carried inside the job payload across the retry path.
 
@@ -156,4 +156,4 @@ Fix: embed `priority` directly in the job's JSON payload at creation time, and h
 
 ## Author
 
-Built by [Kartikeya](https://github.com/0kartik) — final-year CS student.
+Built by [Janardan Kartikeya Agnihotram](https://github.com/0kartik)
