@@ -3,6 +3,7 @@
 A distributed job queue and task scheduler built from scratch — no Celery, no BullMQ, no Sidekiq. Just Redis primitives, Postgres, and the mechanics that make production queue systems reliable.
 
 **Live demo:** https://vector-queue.vercel.app
+
 **Dashboard preview:** ![DashBoard](image.png)
 
 ---
